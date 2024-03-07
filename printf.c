@@ -872,7 +872,7 @@ int printf_(Printf_Type_t type, const char* format, ...)
   va_start(va, format);
   char buffer[1];
   int ret;
-  if (type == SWO)
+  if (type == PF_SWO)
   {
     ret = _vsnprintf(_out_char_swo, buffer, (size_t)-1, format, va);
   }
@@ -908,7 +908,7 @@ int snprintf_(char* buffer, size_t count, const char* format, ...)
 int vprintf_(Printf_Type_t type, const char* format, va_list va)
 {
   char buffer[1];
-  if (type == SWO)
+  if (type == PF_SWO)
   {
     return _vsnprintf(_out_char_swo, buffer, (size_t)-1, format, va);
   }

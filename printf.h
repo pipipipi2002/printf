@@ -53,8 +53,8 @@ extern "C" {
 
 
 typedef enum Printf_Type {
-    DEF,
-    SWO
+    PF_DEF,
+    PF_SWO
 } Printf_Type_t;
 
 /**
