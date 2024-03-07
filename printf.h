@@ -29,6 +29,17 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+/**
+ * This library has been modified to better suit STM32 specific implementations
+ * @author Marvin Pranajaya (@pipipipi2002)
+ * 
+ * Changelog
+ * 08/02/2024
+ * - Added additional putchar for SWO. This is to allow printf to either direct
+ *   to UART or/and SWO at the same time.
+ * - Added `type` parameter to printf and vprintf implementation
+ */
+
 #ifndef _PRINTF_H_
 #define _PRINTF_H_
 
@@ -41,12 +52,25 @@ extern "C" {
 #endif
 
 
+typedef enum Printf_Type {
+    DEF,
+    SWO
+} Printf_Type_t;
+
 /**
  * Output a character to a custom device like UART, used by the printf() function
  * This function is declared here only. You have to write your custom implementation somewhere
  * \param character Character to output
  */
 void _putchar(char character);
+
+/**
+ * Output a character to SWO. Separated implementations so that printf can be used for either SWO and UART.
+ * This function is declared here only. You have to write your custom implementation somewhere
+ * \param character Character to output
+ * @author Marvin Pranajaya (@pipipipi2002)
+ */
+void _putchar_swo(char character);
 
 
 /**
@@ -56,9 +80,13 @@ void _putchar(char character);
  * and internal underscore-appended functions like printf_() are used
  * \param format A string that specifies the format of the output
  * \return The number of characters that are written into the array, not counting the terminating null character
+ * 
+ * ===============================
+ * 08/03/2024: Added type parameter (@pipipipi2002)
+ * 
  */
 #define printf printf_
-int printf_(const char* format, ...);
+int printf_(Printf_Type_t type, const char* format, ...);
 
 
 /**
@@ -93,9 +121,12 @@ int vsnprintf_(char* buffer, size_t count, const char* format, va_list va);
  * \param format A string that specifies the format of the output
  * \param va A value identifying a variable arguments list
  * \return The number of characters that are WRITTEN into the buffer, not counting the terminating null character
+ * 
+ * ===============================
+ * 08/03/2024: Added type parameter (@pipipipi2002)
  */
 #define vprintf vprintf_
-int vprintf_(const char* format, va_list va);
+int vprintf_(Printf_Type_t type, const char* format, va_list va);
 
 
 /**

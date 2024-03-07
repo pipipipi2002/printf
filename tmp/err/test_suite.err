@@ -1,0 +1,4 @@
+clang: error: unknown argument: '-fno-use-cxa-get-exception-ptr'
+clang: error: unknown argument: '-fno-nonansi-builtins'
+clang: error: unknown argument: '-fno-enforce-eh-specs'
+clang: warning: optimization flag '-ffat-lto-objects' is not supported [-Wignored-optimization-argument]
