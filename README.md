@@ -1,3 +1,9 @@
+# THIS IS A MODIFIED REPOSITORY
+- Refer to the [Original Repo](https://github.com/mpaland/printf) for a stable version.
+The changes are made such that it is possible to use 2 different outputs at the same time using the same printf (or equiv) function (with an additional parameter to choose its output). One possible use is when printf is used to send formatted string to either UART output (for data) and SWO output (for debug).
+- To direct to UART, you must implement the function `_putchar(char character)` and add the `PF_DEF` parameter in the printf function. Eg. `printf(PF_DEF, "I am printing to Default output as defined in _putchar(char character)");`
+- To direct to SWO, you must implement the function `_putchar_swo(char character)` and add the `PF_SWO` parameter in the printf function. Eg. `printf(PF_SWO, "I am printing to SWO output as defined in _putchar_swo(char character)");`
+
 # A printf / sprintf Implementation for Embedded Systems
 
 [![Build Status](https://travis-ci.org/mpaland/printf.svg?branch=master)](https://travis-ci.org/mpaland/printf)
